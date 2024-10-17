@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.demo.bloggingApp.domain.UserEntity;
 import org.demo.bloggingApp.dto.request.UserRequest;
 import org.demo.bloggingApp.dto.response.LoginResponse;
+import org.demo.bloggingApp.dto.response.RegistrationResponse;
 import org.demo.bloggingApp.error.AppException;
 import org.demo.bloggingApp.error.ApplicationError;
 import org.demo.bloggingApp.repository.UserRepository;
@@ -30,7 +31,13 @@ public class UserService {
                 .map(existingUser -> {
                     throw new AppException(ApplicationError.USER_ALREADY_EXISTS);
                 })
-                .orElseGet(() -> userRepository.saveUser(user));
+                .orElseGet(() -> {
+                    long id = userRepository.saveUser(user);
+                    return RegistrationResponse.builder()
+                            .UserId(String.valueOf(id))
+                            .message("User registered successfully!")
+                            .build();
+                });
     }
 
     public LoginResponse login(final UserRequest userDto) {
