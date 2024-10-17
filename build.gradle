@@ -37,6 +37,9 @@ dependencies {
     implementation "org.jdbi:jdbi3-jackson2:$jdbiVersion"
     implementation 'io.dropwizard:dropwizard-jdbi3:4.0.9'
     implementation 'mysql:mysql-connector-java:8.0.27'
+
+    // Password encryption dependency
+    implementation 'org.mindrot:jbcrypt:0.4'
 }
 
 application {

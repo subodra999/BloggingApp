@@ -24,4 +24,10 @@ public interface UserDao {
     @RegisterBeanMapper(UserEntity.class)
     Optional<UserEntity> findByNameAndPassword(@Bind("name") String name, @Bind("password") String password);
 
+    @SqlQuery(
+            "SELECT * FROM users WHERE name = :name"
+    )
+    @RegisterBeanMapper(UserEntity.class)
+    Optional<UserEntity> findByName(@Bind("name") String name);
+
 }

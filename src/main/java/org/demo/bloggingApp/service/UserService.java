@@ -9,8 +9,7 @@ import org.demo.bloggingApp.dto.response.LoginResponse;
 import org.demo.bloggingApp.error.AppException;
 import org.demo.bloggingApp.error.ApplicationError;
 import org.demo.bloggingApp.repository.UserRepository;
-
-import java.util.Optional;
+import org.demo.bloggingApp.utils.PasswordUtils;
 
 @Builder
 @NoArgsConstructor
@@ -20,15 +19,32 @@ public class UserService {
     private UserRepository userRepository;
 
     public Object register(final UserRequest userDto) {
-        UserEntity user = UserEntity.builder().name(userDto.getName()).password(userDto.getPassword()).build();
+
+        UserEntity user = UserEntity.builder()
+                .name(userDto.getName())
+                .password(PasswordUtils.hashPassword(userDto.getPassword()))
+                .build();
+
         return userRepository
-                .saveUser(user);
+                .getUserByName(userDto.getName())
+                .map(existingUser -> {
+                    throw new AppException(ApplicationError.USER_ALREADY_EXISTS);
+                })
+                .orElseGet(() -> userRepository.saveUser(user));
     }
 
     public LoginResponse login(final UserRequest userDto) {
         return userRepository
-                .getUserByNameAndPassword(userDto.getName(), userDto.getPassword())
-                .map(user -> LoginResponse.builder().isSuccess(true).welcomeNote("Welcome" + user.getName()).build())
+                .getUserByName(userDto.getName())
+                .map(userEntity -> {
+                    if (PasswordUtils.verifyPassword(userDto.getPassword(), userEntity.getPassword())) {
+                        return LoginResponse.builder()
+                                .welcomeNote("Welcome " + userEntity.getName().toUpperCase() + ", you are loggedIn now!")
+                                .build();
+                    } else {
+                        throw new AppException(ApplicationError.INVALID_PASSWORD);
+                    }
+                })
                 .orElseThrow(() -> new AppException(ApplicationError.USER_NOT_FOUND));
     }
 

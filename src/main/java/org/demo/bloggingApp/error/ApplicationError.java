@@ -7,7 +7,7 @@ public enum ApplicationError {
 
     USER_NOT_FOUND("User not found", 400),
     USER_ALREADY_EXISTS("User already exists", 400),
-    INVALID_CREDENTIALS("Invalid credentials", 400),
+    INVALID_PASSWORD("Invalid password", 400),
     INTERNAL_SERVER_ERROR("Internal server error", 400);
 
     private final String message;

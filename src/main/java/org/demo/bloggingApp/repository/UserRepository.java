@@ -9,4 +9,6 @@ public interface UserRepository {
     Long saveUser(final UserEntity user);
 
     Optional<UserEntity> getUserByNameAndPassword(final String name, final String password);
+
+    Optional<UserEntity> getUserByName(final String name);
 }

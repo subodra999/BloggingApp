@@ -27,4 +27,8 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<UserEntity> getUserByNameAndPassword(final String name, final String password) {
         return this.jdbi.withExtension(UserDao.class, dao -> dao.findByNameAndPassword(name, password));
     }
+
+    public Optional<UserEntity> getUserByName(final String name) {
+        return this.jdbi.withExtension(UserDao.class, dao -> dao.findByName(name));
+    }
 }
