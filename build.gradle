@@ -1,0 +1,48 @@
+plugins {
+    id 'java'  // Java plugin
+    id 'application'  // Application plugin for easy packaging and running
+}
+
+group = 'org.demo.bloggingApp'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21  // Use enum constant for Gradle 9 compatibility
+    targetCompatibility = JavaVersion.VERSION_21
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)  // Java 21 toolchain
+    }
+}
+
+repositories {
+    mavenCentral()  // Central repository for dependencies
+}
+
+ext {
+    lombokVersion = '1.18.34'
+    jdbiVersion = '3.42.0'
+}
+
+dependencies {
+    // Dropwizard core dependency
+    implementation 'io.dropwizard:dropwizard-core:4.0.9'
+
+    // Lombok dependency
+    implementation "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    // JDBI 3 dependency
+    implementation "org.jdbi:jdbi3-core:$jdbiVersion"
+    implementation "org.jdbi:jdbi3-sqlobject:$jdbiVersion"
+    implementation "org.jdbi:jdbi3-jackson2:$jdbiVersion"
+    implementation 'io.dropwizard:dropwizard-jdbi3:4.0.9'
+    implementation 'mysql:mysql-connector-java:8.0.27'
+}
+
+application {
+    mainClass = 'org.demo.bloggingApp.BloggingApp'
+}
+
+tasks.test {
+    useJUnitPlatform()  // Enable JUnit Platform for tests
+}

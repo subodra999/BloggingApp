@@ -1,0 +1,10 @@
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/bloggingApp
+  user: root
+  password:
+  properties:
+    charSet: UTF-8
+  maxSize: 10  # Max number of connections in the pool
+  minSize: 1   # Min number of connections
+  checkConnectionWhileIdle: true
