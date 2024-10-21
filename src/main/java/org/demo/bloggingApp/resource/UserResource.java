@@ -1,5 +1,6 @@
 package org.demo.bloggingApp.resource;
 
+import com.google.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
@@ -7,7 +8,7 @@ import org.demo.bloggingApp.dto.request.UserRequest;
 import org.demo.bloggingApp.service.UserService;
 
 @Path("/user")
-@AllArgsConstructor
+@AllArgsConstructor(onConstructor_ = { @Inject})
 @Consumes (MediaType.APPLICATION_JSON)
 @Produces (MediaType.APPLICATION_JSON)
 public class UserResource {

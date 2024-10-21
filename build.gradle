@@ -40,6 +40,9 @@ dependencies {
 
     // Password encryption dependency
     implementation 'org.mindrot:jbcrypt:0.4'
+
+    // Guice for DI
+    implementation 'com.google.inject:guice:7.0.0'
 }
 
 application {

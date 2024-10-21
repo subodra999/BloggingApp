@@ -1,9 +1,13 @@
 package org.demo.bloggingApp;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.jdbi3.JdbiFactory;
 import org.demo.bloggingApp.configuration.BloggingConfiguration;
+import org.demo.bloggingApp.di.BloggingApplicationModule;
+import org.demo.bloggingApp.di.DIModule;
 import org.demo.bloggingApp.repository.UserRepositoryImpl;
 import org.demo.bloggingApp.resource.UserResource;
 import org.demo.bloggingApp.service.UserService;
@@ -18,11 +22,7 @@ public class BloggingApplication extends Application<BloggingConfiguration> {
 
     @Override
     public void run(BloggingConfiguration bloggingConfiguration, Environment environment) {
-
-        JdbiFactory factory = new JdbiFactory();
-        Jdbi jdbi = factory.build(environment, bloggingConfiguration.getDatabase(), "mysql");
-
-        environment.jersey().register(new UserResource(new UserService(new UserRepositoryImpl(jdbi))));
-        environment.jersey().register(new AppExceptionMapper());
+        Injector injector = Guice.createInjector(new DIModule(environment, bloggingConfiguration));
+        new BloggingApplicationModule(environment, injector).configure();
     }
 }

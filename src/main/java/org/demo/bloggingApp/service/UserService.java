@@ -1,5 +1,6 @@
 package org.demo.bloggingApp.service;
 
+import com.google.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,7 @@ import org.demo.bloggingApp.repository.UserRepository;
 import org.demo.bloggingApp.utils.PasswordUtils;
 
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(onConstructor_ = { @Inject})
 public class UserService {
 
     private UserRepository userRepository;
