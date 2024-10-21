@@ -1,5 +1,5 @@
 # BloggingApp
-Learner project [Java | Dropwizard | JDBI]
+Learner project [Java | Dropwizard | JDBI | Guice]
 
 ```
 UserService 
