@@ -30,4 +30,9 @@ public interface UserDao {
     @RegisterBeanMapper(UserEntity.class)
     Optional<UserEntity> findByName(@Bind("name") String name);
 
+    @SqlQuery(
+            "SELECT * FROM users WHERE id = :id"
+    )
+    @RegisterBeanMapper(UserEntity.class)
+    Optional<UserEntity> findById(@Bind("id") int id);
 }

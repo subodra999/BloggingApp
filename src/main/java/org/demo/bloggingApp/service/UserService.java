@@ -3,7 +3,6 @@ package org.demo.bloggingApp.service;
 import com.google.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import org.demo.bloggingApp.domain.UserEntity;
 import org.demo.bloggingApp.dto.request.UserRequest;
 import org.demo.bloggingApp.dto.response.LoginResponse;
@@ -35,7 +34,7 @@ public class UserService {
                     long id = userRepository.saveUser(user);
                     return RegistrationResponse.builder()
                             .UserId(String.valueOf(id))
-                            .message("User registered successfully!")
+                            .message("User registered successfully! Please take a note of it.")
                             .build();
                 });
     }

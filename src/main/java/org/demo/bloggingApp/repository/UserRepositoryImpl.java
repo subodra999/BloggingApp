@@ -31,4 +31,8 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<UserEntity> getUserByName(final String name) {
         return this.jdbi.withExtension(UserDao.class, dao -> dao.findByName(name));
     }
+
+    public Optional<UserEntity> getUserById(final int id) {
+        return this.jdbi.withExtension(UserDao.class, dao -> dao.findById(id));
+    }
 }

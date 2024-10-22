@@ -11,4 +11,6 @@ public interface UserRepository {
     Optional<UserEntity> getUserByNameAndPassword(final String name, final String password);
 
     Optional<UserEntity> getUserByName(final String name);
+
+    Optional<UserEntity> getUserById(final int id);
 }
