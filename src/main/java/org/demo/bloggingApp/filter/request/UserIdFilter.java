@@ -1,4 +1,4 @@
-package org.demo.bloggingApp.filter;
+package org.demo.bloggingApp.filter.request;
 
 import com.google.inject.Inject;
 import jakarta.servlet.*;

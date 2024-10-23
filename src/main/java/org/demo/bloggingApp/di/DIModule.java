@@ -7,6 +7,8 @@ import io.dropwizard.core.setup.Environment;
 import io.dropwizard.jdbi3.JdbiFactory;
 import lombok.AllArgsConstructor;
 import org.demo.bloggingApp.configuration.BloggingConfiguration;
+import org.demo.bloggingApp.repository.BlogRepository;
+import org.demo.bloggingApp.repository.BlogRepositoryImpl;
 import org.demo.bloggingApp.repository.UserRepository;
 import org.demo.bloggingApp.repository.UserRepositoryImpl;
 import org.jdbi.v3.core.Jdbi;
@@ -22,6 +24,7 @@ public class DIModule extends AbstractModule {
     protected void configure() {
         super.configure();
         bind(UserRepository.class).to(UserRepositoryImpl.class).asEagerSingleton();
+        bind(BlogRepository.class).to(BlogRepositoryImpl.class).asEagerSingleton();
     }
 
     @Provides

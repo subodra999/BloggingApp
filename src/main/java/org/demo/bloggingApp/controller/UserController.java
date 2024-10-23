@@ -1,4 +1,4 @@
-package org.demo.bloggingApp.resource;
+package org.demo.bloggingApp.controller;
 
 import com.google.inject.Inject;
 import jakarta.ws.rs.*;
@@ -11,7 +11,7 @@ import org.demo.bloggingApp.service.UserService;
 @AllArgsConstructor(onConstructor_ = { @Inject})
 @Consumes (MediaType.APPLICATION_JSON)
 @Produces (MediaType.APPLICATION_JSON)
-public class UserResource {
+public class UserController {
 
     private UserService userService;
 
