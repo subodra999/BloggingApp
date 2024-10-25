@@ -43,12 +43,27 @@ dependencies {
 
     // Guice for DI
     implementation 'com.google.inject:guice:7.0.0'
+
+    // JUnit 5 for writing test cases
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+
+    // Mockito for mocking objects
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+
+    // Mockito JUnit 5 integration (to use Mockito with JUnit)
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.4.0'
+
+    // Dropwizard testing utilities (for integration tests)
+    testImplementation 'io.dropwizard:dropwizard-testing:2.1.0'
+
+    // Hamcrest for additional assertions
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }
 
 application {
     mainClass = 'org.demo.bloggingApp.BloggingApp'
 }
 
-tasks.test {
+test {
     useJUnitPlatform()  // Enable JUnit Platform for tests
 }
